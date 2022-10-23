@@ -1,0 +1,27 @@
+table thead tr th {
+  width: 7%;
+}
+
+table tbody td:nth-child(2) {
+  width: 24vw;
+  text-align: left;
+}
+table tbody td:nth-child(3) {
+  width: 11vw;
+  font-size: 1.1em;
+  line-height: 1.1;
+}
+@media only screen and (max-width:1600px) {
+  table tbody td {
+    min-width: 10vw;
+  }
+  .table table {
+    max-height: 77vh;
+  }
+}
+@media only screen and (max-width:1366px) {
+  table tbody td {
+    font-size: 100%;
+  }
+ 
+}

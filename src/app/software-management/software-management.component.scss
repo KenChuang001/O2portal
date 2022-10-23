@@ -1,0 +1,67 @@
+table thead tr th {
+  width: 5%;
+}
+.upload > span {
+  outline: 0;
+  padding: 0.3em 1em;
+  border: 0;
+  margin: 0 0.5em 0 0;
+  vertical-align: middle;
+  font-size: 0.9em;
+  border-radius: 50em;
+  cursor: pointer;
+}
+.upload > span input {
+  position: absolute;
+  font-size: 50px;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+}
+.upload label {
+  word-wrap: break-word;
+  display: inline-block;
+  max-width: 75%;
+  line-height: 1;
+}
+span.upload {
+  width: 70%;
+}
+.nfType {
+  width: 70%;
+}
+.nfType span {
+  display: inline-flex;
+}
+select {
+  margin: 0 5px;
+}
+table th, table td {
+  line-height: 1;
+}
+table tbody td {
+  min-width: 15vw;
+}
+table tbody td:nth-child(2) {
+  width: 24vw;
+  text-align: left;
+}
+table tbody td:nth-child(3) {
+  width: 11vw;
+  font-size: 1.1em;
+}
+@media only screen and (max-width:1600px) {
+  table tbody td {
+    min-width: 17vw;
+  }
+  .table table {
+    max-height: 77vh;
+  }
+}
+@media only screen and (max-width:1366px) {
+  table tbody td,table thead th {
+    font-size: 100%;
+  }
+}

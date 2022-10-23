@@ -1,0 +1,35 @@
+<div class="wrap">
+  <div class="header"><img src="assets/img/logo.png"> O-Cloud Management
+    <!--{{title}}-->
+
+    
+    <mat-menu #menu="matMenu">
+      <button *ngFor="let opt of styles" (click)="changeStyle(opt)" mat-menu-item>
+        <mat-icon>{{styleType === opt.value?'radio_button_checked':'radio_button_unchecked'}}</mat-icon>
+        <span>{{opt.displayName}}</span>
+      </button>
+    </mat-menu>
+    <span>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>format_color_fill</mat-icon>
+        <label>Change Color</label>
+      </button>
+      <button class="logout" type="button" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </span>
+  </div>
+  <div class="menu">
+    <ul>
+      <li (click)="changePage(pageRourter['dashboard'])" class="{{page === 'dashboard'?'active':''}}" matTooltip="主畫面"><mat-icon>dashboard</mat-icon><label>主畫面</label></li>
+      <li (click)="changePage(pageRourter['o-cloud-management'])" class="{{page === 'o-cloud-management'?'active':''}}" matTooltip="O-Cloud 管理"><mat-icon>cloud</mat-icon><label>O-Cloud 管理</label></li>
+      <li (click)="changePage(pageRourter['nf-management'])" class="{{page === 'nf-management'?'active':''}}" matTooltip="NF 管理"><mat-icon><!--speaker_phone-->router</mat-icon><label>NF 管理</label></li>
+      <li (click)="changePage(pageRourter['fault-management'])" class="{{page === 'fault-management'?'active':''}}" matTooltip="故障管理"><mat-icon>fmd_bad</mat-icon><label>故障管理</label></li>
+      <li (click)="changePage(pageRourter['performance-management'])" class="{{page === 'performance-management'?'active':''}}" matTooltip="效能管理"><mat-icon>trending_up</mat-icon><label>效能管理</label></li>
+      <li (click)="changePage(pageRourter['software-management'])" class="{{page === 'software-management'?'active':''}}" matTooltip="軟體管理"><mat-icon>display_settings</mat-icon><label>軟體管理</label></li>
+    </ul>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

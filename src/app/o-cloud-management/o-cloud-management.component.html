@@ -1,0 +1,115 @@
+<h5>O-Cloud List
+  <mat-icon (click)="openCreateModal()">add</mat-icon>
+</h5>
+<div class="table">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Global ID</th>
+        <th>Status</th>
+        <th>NF counts</th>
+        <th>Critical Alarms</th>
+        <th>Performance</th>
+        <th>View</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let opt of ocloudList | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: totalItems, id: 'display' } ">
+        <td>{{opt.name}}</td>
+        <td>{{opt.id}}</td>
+        <td>
+          <ng-template [ngIf]="opt.deployStatus !== 'Deployment Finished'">
+            <mat-progress-bar mode="determinate" value="{{levelValue(opt.deployStatus)}}"></mat-progress-bar>
+          </ng-template>
+          {{opt.deployStatus}}
+        </td>
+        <td>{{opt.nfCount}}</td>
+        <td>{{opt.dmsCount}}</td>
+        <td>
+          <label *ngIf="opt.deployStatus === 'Deployment Finished'" class="greenLight"></label>
+        </td>
+        <td>
+          <mat-icon (click)="viewPage(opt)">description</mat-icon>
+
+        </td>
+        <td>
+          <mat-icon *ngIf="opt.deployStatus === 'Deployment Finished'" (click)="openDelectModal(opt)">delete_forever
+          </mat-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<pagination-controls (pageChange)="pageChanged($event)" screenReaderPaginationLabel="Pagination" previousLabel=""
+  nextLabel="" id="display">
+</pagination-controls>
+
+
+<ng-template #createModal>
+  <h5>Create O-Cloud</h5>
+  <form [formGroup]="createForm">
+    <ul>
+      <li>
+        <label>O-Cloud Name</label>
+        <span>
+          <input type="text" formControlName="name" class="{{formValidated&&createForm.controls['name'].invalid?'required':''}}">
+          <mat-error *ngIf="formValidated&&createForm.controls['name'].invalid">Required</mat-error>
+        </span>
+      </li>
+      <li>
+        <label>Description</label>
+        <span>
+          <textarea formControlName="description"></textarea>
+        </span>
+      </li>
+      <li>
+        <mat-button-toggle-group formControlName="method" (change)="changeMethod($event)">
+          <mat-button-toggle value="existing">列管既有的 O-Cloud</mat-button-toggle>
+          <mat-button-toggle value="smo">透過 SMO 建立 O-Cloud</mat-button-toggle>
+        </mat-button-toggle-group>
+        <ng-template [ngIf]="createForm.controls['method'].value === 'existing'">
+          <div>
+            <label>IMS Endpoint</label>
+            <span>
+              <input type="text" formControlName="imsEndpoint" class="{{formValidated&&createForm.controls['imsEndpoint'].invalid?'required':''}}">
+              <mat-error *ngIf="formValidated&&createForm.controls['imsEndpoint'].invalid">Required</mat-error>
+            </span>
+          </div>
+        </ng-template>
+
+        <ng-template [ngIf]="createForm.controls['method'].value === 'smo'">
+          <div>
+            <label>First Node URL</label>
+            <span>
+              <input type="text" formControlName="firstNode" class="{{formValidated&&createForm.controls['firstNode'].invalid?'required':''}}">
+              <mat-error *ngIf="formValidated&&createForm.controls['firstNode'].invalid">Required</mat-error>
+            </span>
+          </div>
+          <div>
+            <label>Image URL</label>
+            <span>
+              <input type="text" formControlName="image" class="{{formValidated&&createForm.controls['image'].invalid?'required':''}}">
+              <mat-error *ngIf="formValidated&&createForm.controls['image'].invalid">Required</mat-error>
+            </span>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div class="buttons">
+      <button type="button" mat-dialog-close>Cancel</button>
+      <button type="button" (click)="create()">OK</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #deleteModal>
+  <h5>Delete O-Cloud
+  </h5>
+  <p>Confirm to delete O-Cloud - {{selectOcloud.name}} ?</p>
+  <div class="buttons">
+    <button type="button" mat-dialog-close>Cancel</button>
+    <button type="button" (click)="delete()">Delete</button>
+  </div>
+</ng-template>

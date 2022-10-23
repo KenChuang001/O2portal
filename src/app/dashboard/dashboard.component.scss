@@ -1,0 +1,198 @@
+.dashboard {
+    font-size: 135%;
+}
+.dashboard > div {
+    display: inline-block;
+    vertical-align: top;
+}
+.dashboard .leftArea {
+    width: 50%;
+    height: 11em;
+}
+.dashboard .rightArea {
+    width: 50%;
+}
+.dashboard .rightArea > div {
+    display: inline-block;
+    vertical-align: top;
+    width: 40%;
+    height: 23vh;
+    margin: 1.5%;
+    padding: 1% 3%;
+    border-radius: 10px;
+}
+.dashboard .rightArea > div:nth-child(1) .bigValue,
+.dashboard .rightArea > div:nth-child(2) .bigValue {
+    margin: .3em 0 0;
+}
+.dashboard .rightArea > div label {
+    display: block;
+}
+.dashboard .rightArea > div.resource {
+    width: 89%;
+    display: block;
+}
+.dashboard .rightArea > div.resource > label {
+    text-align: center;
+}
+.dashboard .rightArea > div.resource > span {
+    display: inline-block;
+    vertical-align: top;
+    width: 44%;
+    text-align: left;
+    position: relative;
+    padding: 1% 3%;
+}
+.dashboard .rightArea > div.resource > span label {
+    text-align: left;
+}
+.dashboard .table {
+    width: 97.5%;
+    margin: .5% 1% 0;
+}
+.dashboard .table table {
+    display: block;
+    width: 100%;
+    max-height: 28vh;
+    padding: 0 .4% 0 0;
+    margin: 1% 0 0;
+    overflow: auto;
+}
+
+.dashboard .table table td,
+.dashboard .table table th {
+    padding: .8%                                                                                                                                                   1%;
+    white-space: nowrap;
+    font-size: 135%;
+    line-height: 1;
+}
+.dashboard .table table tr th,
+.dashboard .table table tr td {
+    width: 8%;
+}
+.dashboard .table table tr th:first-child,
+.dashboard .table table tr td:first-child {
+    width: 30%;
+}
+.dashboard .table table tr th:not(:first-child),
+.dashboard .table table tr td:not(:first-child) {
+    text-align: center;
+}
+.table table th {
+    text-align: left;
+    font-weight: normal;
+    position: relative;
+}
+
+.dashboard .table table tr td:last-child {
+    cursor: pointer;
+    color: #2e94e7;
+}
+.dashboard .table table tr td:last-child .material-icons {
+    font-size: 1.2em;
+    vertical-align: sub;
+}
+.dashboard .leftArea .nodes {
+    padding: 1% 3%;
+    margin: 1.5%;
+    border-radius: 10px;
+}
+.dashboard .leftArea .nodes span {
+    vertical-align: top;
+    display: inline-block;
+    padding: 1% 3%;
+    width: 43%;
+    position: relative;
+}
+.dashboard .leftArea .nodes span:after,
+.dashboard .rightArea > div.resource > span:after {
+    content: '';
+    width: 1px;
+    height: 6em;
+    position: absolute;
+    right: 0;
+    top: 1em;
+}
+.dashboard .leftArea .nodes span:nth-child(3)::after,
+.dashboard .rightArea > div.resource > span:nth-child(3)::after {
+    display: none;
+}
+.dashboard .bigValue {
+    font-size: 4.5em;
+    font-weight: bold;
+    text-align: center !important;
+    display: block;
+    font-family: sans-serif;
+    line-height: 1;
+}
+.dashboard .leftArea .nodes > label {
+    display: block;
+}
+.dashboard .leftArea .nodes .chart {
+    display: block;
+    width: 100%;
+    height: 15.3em;
+    margin: 0.2em 0 0
+}
+
+.dashboard .boxTitle {
+    font-size: 1.5em;
+    margin: 0 -3px;
+    text-align: center;
+    padding: 0 0 .3em;
+}
+.dashboard .table .boxTitle {
+    margin-left: .5em;
+    border: none;
+}
+.dashboard .unit {
+    font-size: 1.3em;
+}
+@media only screen and (max-width:1600px) {
+    .dashboard .leftArea .nodes .chart {
+        height: 13.3em;
+    }
+    .dashboard .bigValue {
+        font-size: 3.5em;
+    }
+    .dashboard .nodes .bigValue {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 0 0 23%;
+    }
+    .dashboard .rightArea > div {
+        height: 21vh;
+    }
+    .dashboard .rightArea > div.resource {
+        height: 22.5vh;
+    }
+    .dashboard .leftArea .nodes span:after,
+    .dashboard .rightArea > div.resource > span:after {
+        content: '';
+        height: 3.5em;
+    }
+    .dashboard .table table {
+        max-height: 32vh;
+        margin: 0;
+    }
+    .dashboard .table table td,
+    .dashboard .table table th {
+    padding: .5% 1%;
+    }
+    .dashboard .boxTitle {
+        font-size: 1.3em;
+        padding: 0;
+    }
+}
+@media only screen and (max-width: 1366px) {
+    .dashboard .leftArea .nodes .chart {
+        height: 10em;
+    }
+    .dashboard .table table {
+        max-height: 28vh;
+        margin: 0;
+    }
+    .dashboard .table table th,.dashboard .table table td {
+        font-size: 100%!important;
+    }
+}

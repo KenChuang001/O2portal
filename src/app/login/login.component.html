@@ -1,0 +1,25 @@
+<div class="loginPage">
+
+
+    <div class="loginform">
+      <div class="logo">Welcome to the<br/>O-Cloud Management System</div>
+      <div class="center">USER LOGIN</div>
+      <div class="logon_error" *ngIf="errMsg">
+        <span class="material-icons">warning</span>
+        {{errMsg}}
+      </div>
+      <p><span class="material-icons">account_circle</span>
+        <!-- <label>Username</label> -->
+        <input type="text" [(ngModel)]="userId" (keypress)="keypressHandler($event)" autocomplete="false">
+      </p>
+      <p><span class="material-icons">lock</span>
+        <!-- <label>Password</label> -->
+        <input type="password" [(ngModel)]="password" (keypress)="keypressHandler($event)" autocomplete="false">
+      </p>
+      <button (click)="onLoggedin()">Login</button>
+
+    </div>
+
+
+
+  </div>

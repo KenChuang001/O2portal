@@ -1,0 +1,74 @@
+<div class="dashboard">
+  <div class="leftArea">
+    <div class="nodes">
+      <label class="boxTitle">Nodes</label>
+      <span><label class="unit">Total</label><label class="bigValue">{{systemSummary.totalNodes}}</label></span>
+      <span><label class="unit">Used</label><label class="bigValue">{{systemSummary.usedNodes}}</label></span>
+      <div class="chart">
+        <dx-circular-gauge id="gauge" [value]="utilizationPercent">
+          <dxo-scale [startValue]="0" [endValue]="100" [tickInterval]="10">
+            <dxo-label [useRangeColors]="true">
+              <dxo-font [size]="commonService.scaleFontSize"></dxo-font>
+            </dxo-label>
+          </dxo-scale>
+          <dxo-size [height]="circularHeight"></dxo-size>
+          <dxo-range-container palette="pastel" [width]="commonService.rangeWidth">
+            <dxi-range [startValue]="0" [endValue]="90" [color]="commonService.colorOne()"></dxi-range>
+            <dxi-range [startValue]="90" [endValue]="95" [color]="commonService.colorTwo()"></dxi-range>
+            <dxi-range [startValue]="95" [endValue]="100" [color]="commonService.colorThree()"></dxi-range>
+          </dxo-range-container>
+          <dxo-title text="Utilization {{utilizationPercent}}%">
+            <dxo-font [size]="30"></dxo-font>
+          </dxo-title>
+        </dx-circular-gauge>
+      </div>
+    </div>
+  </div>
+
+  <div class="rightArea">
+    <div>
+      <label class="boxTitle">O-Clouds</label>
+      <span class="bigValue">{{systemSummary.ocloudCount}}</span>
+    </div>
+
+    <div>
+      <label class="boxTitle">Network Functions</label>
+      <span class="bigValue">{{systemSummary.nfCount}}</span>
+    </div>
+
+    <div class="resource">
+      <label class="boxTitle">Resource Utilization</label>
+      <span><label class="unit">CPU</label><label class="bigValue">{{systemSummary.cpuUtilized}}</label></span>
+      <span><label class="unit">Interface</label><label
+          class="bigValue">{{systemSummary.interfaceUtilized}}</label></span>
+    </div>
+  </div>
+
+  <div class="table">
+    <label class="boxTitle">O-Cloud List</label>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>DMS counts</th>
+          <th>NF counts</th>
+          <th>Fault counts</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let opt of ocloudSummary">
+          <td>{{opt.name}}</td>
+          <td>{{opt.dmsCount}}</td>
+          <td>{{opt.nfCount}}</td>
+          <td>{{opt.faultCount}}</td>
+          <td (click)="veiw(opt)">
+            <mat-icon>search</mat-icon>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>

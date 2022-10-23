@@ -1,0 +1,349 @@
+
+svg {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  z-index: 1000;
+}
+svg circle {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  // stroke: #6f10db;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform: translate(5px, 5px);
+}
+.center {
+  text-align: center;
+}
+.percent {
+  position: relative;
+  width: 16%;
+  height: 25%;
+  padding: 5% 0 3%;
+  font-size: 135%;
+  font-weight: bold;
+  font-family: Microsoft JhengHei;
+  line-height: 120%;
+  border-radius: 50%;
+  z-index: 1000;
+  display: inline-block;
+  margin: 0.5em 1em 0;
+  border: 9px solid;
+}
+
+.percent .number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5em;
+  color: #eee;
+}
+.percent .number h2 {
+  color: #777;
+  font-weight: 700;
+  font-size: 40px;
+  transition: 0.5s;
+}
+.percent svg circle {
+  cx:70px;
+  cy:70px;
+  r:70px;
+}
+.ocloudInfo h5 button {
+  background: transparent;
+  border-radius: 50em;
+  cursor: pointer;
+  font-size: .8em;
+  padding: 0.1em 1em .1em .7em;
+  vertical-align: middle;
+  margin: 0 0.5em 0 0;
+}
+.ocloudInfo h5 button .material-icons {
+  vertical-align: middle;
+  font-size: 20px;
+  margin:0.1em 0.3em .1em 0;
+}
+.boxTitle {
+  display: block;
+  font-size: 2em;
+  line-height: 2;
+  margin: 0 0 0.5em;
+  text-align: center;
+  padding: 0;
+}
+.boxTitle a {
+    font-size: .6em;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+.boxTitle a .material-icons {
+  vertical-align: middle;
+  font-size: .9em;
+  margin: 0 0 0 .3em;
+}
+.boxTitle + div {
+  height: 25em;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+:host ::ng-deep .dxg-title text {
+  fill: #fff!important;
+}
+
+.BOX {
+  position: relative;
+  display: inline-block;
+  padding:0 1.5em 1.5em;
+  vertical-align: top;
+  margin: 0 1% 1% 0;
+  border-radius: 10px;
+  opacity: 1;
+}
+.col-md-3 {
+  width: 29%;
+}
+.col-md-4 {
+  width: 35%;
+}
+.col-md-8 {
+  width:55.7%;
+}
+
+.cpu > span {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+.cpu > span .unit {
+  font-size: 1.8em;
+  margin: 0.1em 0 2em 2em;
+  display: inline-block;
+  width: 2em;
+}
+.bigValue {
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center !important;
+  display: inline-block;
+  font-family: sans-serif;
+  line-height: 1;
+  vertical-align: top;
+  margin: 0 0 0 1.5em;
+}
+:host ::ng-deep .dxg-title text {
+  fill: #eee!important;
+}
+:host ::ng-deep #gauge svg.dxg-circular-gauge {
+  display: block;
+  transform: translateX( 6px) translateY(-47px) scale(0.75);
+}
+.Fault, .cpu {
+  height: 19em;
+}
+.basicInfo ul {
+  margin: 0 0 1em 0;
+}
+.basicInfo ul li {
+  font-size: 1.35em;
+  margin: 0 0 0 1.5em;
+}
+.basicInfo ul li label {
+  display: inline-block;
+  margin:  0;
+  width: 34%;
+}
+.basicInfo ul li label::after {
+  content: ':';
+  display: inline-block;
+  margin: 0 .3em;
+}
+.basicInfo ul li span {
+  display: inline-block;
+  width: 65%;
+  word-break: break-all;
+  vertical-align: top;
+}
+.basicInfo ul li span button {
+  background: transparent;
+  background-color: #1d61a1;
+  color: #fff;
+  outline: 0;
+  padding: 0.3em 1em;
+  border: 0;
+  margin: 0 0 0 1em;
+  vertical-align: bottom;
+  font-size: 0.8em;
+  border-radius: 50em;
+  cursor: pointer;
+}
+.BOX table {
+  max-height: 25em;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.greenLight {
+  display: block;
+  margin: auto;
+  width: 1em;
+  height: 1em;
+  border-radius: 50em;
+  background-color: #89d135;
+}
+
+.grayLight {
+  display: block;
+  margin: auto;
+  width: 1em;
+  height: 1em;
+  border-radius: 50em;
+  background-color: #7e7e7e;
+}
+.h30 {
+  height: 30em;
+}
+.opt {
+  color: #67a0c9;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: list-item;
+  margin: 0 0 0 1.5em;
+  text-decoration: underline;
+}
+.opt .material-icons {
+  vertical-align: middle;
+}
+.opt.active .material-icons {
+  transform: rotate(180deg);
+}
+.opt + table thead tr th:nth-child(1),
+.opt + table tbody tr th:nth-child(1) {
+  width: 30%;
+}
+.opt + table thead tr th:nth-child(2),
+.opt + table tbody tr th:nth-child(2) {
+  width: 10%;
+}
+.ResourceTooltip {
+  position: relative;
+}
+.ResourceTooltip a {
+  padding: .5em;
+}
+.ResourceTooltip > div {
+  position: absolute;
+  top: 0;
+  left: -7em;
+  background-color: #99caec;
+  border-radius: 4px;
+  padding: .5em;
+  z-index: 99999;
+}
+.ResourceTooltip > div table {
+  font-size:.5em;
+}
+.ResourceTooltip > div table th,
+.ResourceTooltip > div table td {
+  padding: .5em 1em;
+  color: #333;
+  background-color: transparent;
+}
+.ResourceTooltip > div table th {
+  background-color: #192c53;
+  color: #fff;
+}
+.ResourceTooltip > div table td {
+  border: 1px solid #223b50;
+  background-color: #fff;
+}
+
+.Critical {
+  border-color: #FF0000;
+}
+.Major {
+  border-color: #FFA042;
+}
+.Minor {
+  border-color: #FFFF37;
+}
+.Warning {
+  border-color: #00FFFF;
+}
+.BOX.col-md-3 .table td {
+  width: 15%;
+  line-height: 1;
+}
+.BOX.col-md-3.nf .table td {
+  width: 20%;
+}
+.table table {
+  display: initial;
+}
+@media only screen and (min-width:1366px) and (max-width:1645px) {
+  .percent{
+    margin: 1.5em 0.5em;
+  }
+  .BOX {
+    padding: 0 1em 1.5em;
+  }
+  .boxTitle {
+    font-size: 1.8em;
+    line-height: 1.5;
+}
+.basicInfo ul {
+  font-size: .9em;
+}
+.h30 {
+  height: 22em;
+}
+}
+@media only screen and (max-width:1366px) {
+  .h30 {
+    height: 17em;
+  }
+  .boxTitle {
+    font-size: 1.5em;
+    line-height: 1.5;
+}
+.basicInfo ul {
+  font-size: .9em;
+}
+.percent{
+  margin: 1em 0.5em;
+}
+.percent .number {
+  margin: 0.3em 0 0 0.3em;
+}
+.col-md-8 {
+  width: 57.3%;
+}
+.col-md-3 {
+  width: 25%;
+}
+.basicInfo {
+  width: 39%;
+}
+.basicInfo ul li label {
+  width: auto;
+}
+.Fault, .cpu {
+  height: 15em;
+}
+:host ::ng-deep #gauge svg.dxg-circular-gauge {
+  display: block;
+  transform: translateX(6px) translateY(-71px) scale(0.75);
+}
+.table table td, .table table th {
+  font-size: 100%;
+  line-height: 1;
+}
+}

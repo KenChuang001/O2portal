@@ -1,0 +1,95 @@
+<h5>Software Management
+  <mat-icon (click)="openCreateModal()">add</mat-icon>
+</h5>
+<div class="table">
+  <table>
+    <thead>
+      <tr>
+        <th>File Name</th>
+        <th>Type</th>
+        <th>Version</th>
+        <th>Description</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let opt of softwareList | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: totalItems, id: 'display' } ">
+        <td>{{opt.fileName}}</td>
+        <td>{{typeText(opt.type)}}</td>
+        <td>{{opt.version}}</td>
+        <td>{{opt.description}}</td>
+        <td>
+          <mat-icon (click)="openDelectModal(opt)">delete_forever</mat-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<pagination-controls (pageChange)="pageChanged($event)" screenReaderPaginationLabel="Pagination" previousLabel=""
+  nextLabel="" id="display">
+</pagination-controls>
+
+
+<ng-template #createModal>
+  <h5>Create Software</h5>
+  <form [formGroup]="createForm">
+    <ul>
+      <li>
+        <label>Software File</label>
+        <span class="upload {{formValidated&&createForm.controls['fileName'].invalid?'required':''}}">
+          <span>Upload
+            <input type="file" (change)="fileChange($event)" accept=".tar" #fileInput>
+          </span>
+          <label>{{createForm.controls['fileName'].value}}</label>
+          <mat-error *ngIf="formValidated&&createForm.controls['fileName'].invalid">is Required</mat-error>
+          <mat-error *ngIf="fileMsg">{{fileMsg}}</mat-error>
+        </span>
+      </li>
+      <li>
+        <label>Version</label>
+        <span>
+          <input type="text" formControlName="version" class="{{formValidated&&createForm.controls['version'].invalid?'required':''}}">
+          <mat-error *ngIf="formValidated&&createForm.controls['version'].invalid">Required</mat-error>
+        </span>
+      </li>
+      <li>
+        <label>Description</label>
+        <span class="top">
+          <textarea formControlName="description"></textarea>
+        </span>
+      </li>
+      <li>
+        <label>Type</label>
+        <span class="nfType top">
+          <mat-button-toggle-group formControlName="type">
+            <mat-button-toggle value="0">O-Cloud</mat-button-toggle>
+            <mat-button-toggle value="1">NF</mat-button-toggle>
+          </mat-button-toggle-group>
+          <span *ngIf="createForm.controls['type'].value === '1'">
+            <label>Type</label>
+            <select formControlName="nfType" (click)="createForm.controls['type'].setValue('1')">
+              <option *ngFor="let nfType of nfTypeList" [value]="nfType">{{nfType}}</option>
+            </select>
+          </span>
+        </span>
+      </li>
+    </ul>
+    <div class="buttons">
+      <button type="button" mat-dialog-close>Cancel</button>
+      <button type="button" (click)="create()">OK</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #deleteModal>
+  <h5>Delete Software
+  </h5>
+  <p>Confirm to delete software – {{selectSoftware.fileName}} ?</p>
+  <div class="buttons">
+    <button type="button" mat-dialog-close>Cancel</button>
+    <button type="button" (click)="delete()">Delete</button>
+  </div>
+</ng-template>

@@ -1,0 +1,208 @@
+<div class="ocloudInfo">
+  <h5>
+    <button (click)="back()">
+      <span class="material-icons">arrow_back</span>Back
+    </button>
+    O-Cloud Information – {{ocloudInfo.name}}
+  </h5>
+  <div class="BOX col-md-4 cpu">
+    <label class="boxTitle">CPU</label>
+    <span class="col-md-4">
+      <label class="unit">Total</label><label class="bigValue">{{ocloudPerformance.totalCpu}}</label>
+      <label class="unit">Utilized</label><label class="bigValue">{{ocloudPerformance.usedCpu}}</label>
+    </span>
+    <span class="chart col-md-8 ">
+      <dx-circular-gauge id="gauge" [value]="utilizationPercent">
+        <dxo-scale [startValue]="0" [endValue]="100" [tickInterval]="10">
+          <dxo-label [useRangeColors]="true">
+            <dxo-font [size]="commonService.scaleFontSize"></dxo-font>
+          </dxo-label>
+        </dxo-scale>
+        <dxo-range-container palette="pastel" [width]="commonService.rangeWidth">
+          <dxi-range [startValue]="0" [endValue]="90" [color]="commonService.colorOne()"></dxi-range>
+          <dxi-range [startValue]="90" [endValue]="95" [color]="commonService.colorTwo()"></dxi-range>
+          <dxi-range [startValue]="95" [endValue]="100" [color]="commonService.colorThree()"></dxi-range>
+        </dxo-range-container>
+        <dxo-title text="Utilization {{utilizationPercent}}%">
+          <dxo-font [size]="30"></dxo-font>
+        </dxo-title>
+      </dx-circular-gauge>
+    </span>
+  </div>
+
+  <div class="BOX col-md-8 center Fault ">
+    <label class="boxTitle">Fault Messages
+      <a href="javascript:void(0)" (click)="viewMore()">
+        View More<span class="material-icons">more_horiz</span>
+      </a>
+    </label>
+    <span class="percent {{severityText(severity)}}" *ngFor="let severity of severitys;let i=index">
+      {{severityText(severity)}}<br>{{severityCount(severity)}}
+      <!-- <svg>
+        <circle [style.stroke]="faultColors[i]"></circle>
+        <circle [style.stroke]="faultColors[i]"></circle>
+      </svg>
+      <div class="number">
+        {{severityText(severity)}}<br>{{severityCount(severity)}}
+      </div> -->
+    </span>
+  </div>
+
+  <div class="BOX col-md-3 basicInfo h30">
+    <label class="boxTitle">Basic Information</label>
+    <ul>
+      <li><label>Name</label><span>{{ocloudInfo.name}}</span></li>
+      <li><label>Global ID</label><span>{{ocloudInfo.id}}</span></li>
+      <li><label>Callback URI</label><span>{{ocloudInfo.callbackUri}}</span></li>
+      <li><label>IMS Endpoint</label><span>{{ocloudInfo.imsEndpoint}}</span></li>
+    </ul>
+
+    <label class="boxTitle">Software Information</label>
+    <ul>
+      <li>
+        <label>Version</label>
+        <span>{{ocloudInfo.softwareVersion}}
+          <!--<button (click)="openUpdateModel()">Update</button>--></span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="BOX col-md-3 nf h30">
+    <label class="boxTitle">NF List</label>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>DMS</th>
+            <th>Status</th>
+            <th>View</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let opt of ocloudInfo.nf">
+            <td>{{opt.name}}</td>
+            <td>{{opt.dmsName}}</td>
+            <td>
+              <label *ngIf="opt.status === 0" class="grayLight"></label>
+              <label *ngIf="opt.status === 1" class="greenLight"></label>
+            </td>
+            <td (click)="veiw(opt)">
+              <mat-icon>search</mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="BOX col-md-3 h30">
+    <label class="boxTitle">Resource Pools</label>
+    <div>
+      <div *ngFor="let opt of ocloudInfo.resourcepool;let i=index">
+        <div class="table">
+          <div class="opt" (click)="opt.active = !opt.active" class="{{opt.active?'active':''}}">{{opt.poolName}}
+            <span class="material-icons">expand_less</span>
+          </div>
+          <table *ngIf="opt.active">
+            <thead>
+              <tr>
+                <th>Node</th>
+                <th>CPU</th>
+                <th>Memory</th>
+                <th>Storage</th>
+                <th>Interface</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let node of opt.node;let j=index">
+                <td>{{node.nodeName}}</td>
+                <td class="ResourceTooltip">
+                  <a href="javascript:void(0)" (mouseover)="showTooltipCpu[i+'_'+j]=true"
+                    (mouseout)="showTooltipCpu[i+'_'+j]=false">{{node.cpu.length}}</a>
+                  <!-- Tooltip Cpu -->
+                  <div *ngIf="showTooltipCpu[i+'_'+j]">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Cores</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let cpu of node.cpu">
+                          <td>{{cpu.name}}</td>
+                          <td>{{cpu.cores}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </td>
+                <td>{{node.memory.size}}</td>
+                <td>{{node.storage.size}}</td>
+                <td class="ResourceTooltip">
+                  <a href="javascript:void(0)" (mouseover)="showTooltipNic[i+'_'+j]=true"
+                    (mouseout)="showTooltipNic[i+'_'+j]=false">{{node.nic.length}}</a>
+                  <!-- Tooltip Nic -->
+                  <div *ngIf="showTooltipNic[i+'_'+j]">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let nic of node.nic">
+                          <td>{{nic.name}}</td>
+                          <td>{{nic.description}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #updateModal>
+  <h5>Software Update</h5>
+  <form [formGroup]="updateForm">
+    <ul>
+      <li>
+        <label>Current Version:</label>
+        <span>{{ocloudInfo.softwareVersion}}</span>
+      </li>
+      <li>
+        <label>Update Software</label>
+
+        <mat-button-toggle-group formControlName="type" (change)="changeType($event)">
+          <mat-button-toggle value="imageUrl">Image URL</mat-button-toggle>
+          <mat-button-toggle value="existedFile">Existed File</mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <div *ngIf="updateForm.controls['type'].value === 'imageUrl'">
+          <input type="text" formControlName="imageUrl" placeholder="Image URL" class="{{formValidated&&updateForm.controls['imageUrl'].invalid?'required':''}}">
+          <mat-error *ngIf="formValidated&&updateForm.controls['imageUrl'].invalid">Required</mat-error>
+        </div>
+        <div *ngIf="updateForm.controls['type'].value === 'existedFile'">
+          <select formControlName="fileName" placeholder="Image URL" class="{{formValidated&&updateForm.controls['fileName'].invalid?'required':''}}">
+            <option *ngFor="let opt of softwareList" [value]="opt.fileName">{{opt.fileName}}</option>
+          </select>
+          <mat-error *ngIf="formValidated&&updateForm.controls['fileName'].invalid">Required</mat-error>
+        </div>
+      </li>
+    </ul>
+    <div class="buttons">
+      <button type="button" mat-dialog-close>Cancel</button>
+      <button type="button" (click)="update()">OK</button>
+    </div>
+  </form>
+</ng-template>

@@ -1,0 +1,92 @@
+<h5>Fault Messages</h5>
+
+<form [formGroup]="searchForm">
+  <div class="filter">
+    <span><label>O-Cloud</label>
+      <select formControlName="cloudId">
+        <option value="All">All</option>
+        <option *ngFor="let opt of ocloudList" [value]="opt.id">{{opt.id}}</option>
+      </select>
+      <mat-error *ngIf="searchForm.controls['cloudId'].invalid">Required</mat-error>
+    </span>
+    <span><label>NF</label>
+      <select formControlName="nfId">
+        <option value="All">All</option>
+        <option *ngFor="let opt of nfList" [value]="opt.id">{{opt.name}}</option>
+      </select>
+      <mat-error *ngIf="searchForm.controls['nfId'].invalid">Required</mat-error>
+    </span>
+    <span><label>Severity</label>
+      <select formControlName="severity">
+        <option value="All">All</option>
+        <option *ngFor="let severit of severitys" [value]="severit">{{severit}}</option>
+      </select>
+      <mat-error *ngIf="searchForm.controls['severity'].invalid">Required</mat-error>
+    </span>
+    <span><label>From</label>
+      <span>
+        <input
+          matInput
+          [matDatepicker]="datepickerFrom"
+          datePickerFormat="YYYY-MM-DD"
+          formControlName="from"
+          placeholder="yyyy-mm-dd"
+        >
+        <mat-datepicker-toggle matSuffix [for]="datepickerFrom"></mat-datepicker-toggle>
+        <mat-datepicker #datepickerFrom></mat-datepicker>
+      </span>
+    </span>
+    <span><label>To</label>
+      <span>
+      <input
+          matInput
+          [matDatepicker]="datepickerTo"
+          datePickerFormat="YYYY-MM-DD"
+          formControlName="to"
+          placeholder="yyyy-mm-dd"
+        >
+      <mat-datepicker-toggle matSuffix [for]="datepickerTo"></mat-datepicker-toggle>
+      <mat-datepicker #datepickerTo></mat-datepicker>
+    </span>
+    </span>
+    <span class="material-icons" (click)="search()">search</span>
+  </div>
+</form>
+
+<div class="table">
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>O-Cloud</th>
+        <th>NF</th>
+        <th>Severity</th>
+        <th>Fault Context</th>
+        <th>Status</th>
+        <th>Process Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let opt of faultMessage.faultMessages;let i=index">
+        <td>{{opt.timestamp}}</td>
+        <td>{{opt.cloudId}}</td>
+        <td>{{opt.nfId}}</td>
+        <td>{{opt.severity}}</td>
+        <td>{{opt.context}}</td>
+        <td>{{opt.isCleared?'Cleared':'New'}}</td>
+        <td>
+          <label *ngIf="opt.processStatus === 0" class="greenLight"></label>
+          <label *ngIf="opt.processStatus === 1" class="redLight"></label>
+          {{opt.processComment}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- pagination -->
+  <ng-template
+    *ngFor="let item of nullList| paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: totalItems, id: 'display' } ">
+  </ng-template>
+  <pagination-controls (pageChange)="pageChanged($event)" screenReaderPaginationLabel="Pagination" previousLabel=""
+    nextLabel="" id="display">
+  </pagination-controls>
+</div>

@@ -1,0 +1,107 @@
+td .greenLight,
+td .redLight {
+  display: inline-block;
+  margin: 0 .5em 0 0;
+}
+tbody tr td:last-child {
+  text-align: left;
+  padding-left: 1em;
+}
+
+.filter {
+  display: block;
+  padding: 0.5em;
+  text-align: center;
+  border-radius: 4px;
+  width: 96%;
+}
+.filter > span {
+  display: inline-block;
+  margin: 0 1em;
+}
+.filter > span > span {
+  position: relative;
+}
+.filter > span > span label {
+  font-size: 1.05em!important;
+}
+:host ::ng-deep .mat-calendar-body-selected {
+  background-color: #4589cb!important;
+  color: #fff;
+}
+:host ::ng-deep .mat-datepicker-toggle {
+  color: rgba(0,0,0,.54);
+  position: absolute;
+  right: 15px;
+  top: 0;
+  color: #3e8bcdc9;
+}
+
+:host ::ng-deep .filter > span > span .mat-icon-button {
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  font-size: 80%;
+  color: #3e8bcd;
+}
+input.mat-datepicker-input {
+  padding: 0.35em;
+  border-radius: 4px;
+  border: none;
+  margin: 0 3px;
+  font-size: 15px;
+}
+.filter select,
+.filter input[type="text"] {
+  margin: 0 5px;
+  padding: 0.3em;
+  border-radius: 4px;
+  min-width: 10em;
+  font-size: 15px;
+  border: none!important;
+}
+.filter .material-icons {
+  cursor: pointer;
+  vertical-align: middle;
+  margin: 0;
+  border-radius: 50em;
+  padding: 0.2em;
+  transition: all .3s;
+}
+table thead th {
+  min-width: 11.5vw;
+}
+table tbody td:nth-child(1){
+  width: 13vw;
+  text-align: left;
+}
+table tbody td:nth-child(5) {
+  width: 15vw;
+  text-align: left;
+}
+@media only screen and (max-width:1600px) {
+  table tbody td {
+    min-width: 12vw;
+  }
+  .table table {
+    max-height: 70vh;
+  }
+  table tbody td:nth-child(1) {
+    width: 15vw;
+}
+}
+@media only screen and (max-width:1366px ){
+  table tbody td,table thead th {
+    font-size: 100%;
+  }
+  table tbody td:nth-child(1) {
+    width: 15vw;
+}
+  .filter select,
+  .filter input[type=text] {
+    min-width: initial;
+}
+.filter span {
+  margin: 0 1%;
+}
+}
